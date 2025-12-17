@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Gerador de Sense FF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Gerador público de Sense Free Fire">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+h1 {
+  color: #ff9800;
+}
+button {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ff9800;
+  color: #000;
+  cursor: pointer;
+  margin-top: 15px;
+}
+button:hover {
+  background: #ffc107;
+}
+.box {
+  background: #1e1e1e;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  white-space: pre-line;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.footer {
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🔥 Gerador de Sense Free Fire</h1>
+  <p>Clique e gere 1000 Sense aleatórias</p>
+
+  <button onclick="gerarSense()">GERAR SENSE</button>
+
+  <div class="box" id="resultado">
+    Clique no botão para gerar as Sense
+  </div>
+
+  <div class="footer">
+    © Seu Site - Gerador de Sense FF
+  </div>
+</div>
+
+<script>
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function gerarSense() {
+  let resultado = "";
+  for (let i = 1; i <= 1000; i++) {
+    resultado += 
+`🎯 Sense ${i}
+Geral: ${rand(80, 200)}
+Red Dot: ${rand(70, 180)}
+Mira 2x: ${rand(60, 170)}
+Mira 4x: ${rand(50, 160)}
+AWM: ${rand(20, 90)}
+Olhadinha: ${rand(50, 120)}
+-------------------------\n`;
+  }
+ 
+ document.getElementById("resultado").innerText = resultado;
+}
+</script>
+
+</body>
+</html>
