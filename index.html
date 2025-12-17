@@ -2,93 +2,113 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Gerador de Sense FF</title>
+<title>Gerador de Sense FF - Key Expira</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Gerador privado de Sense Free Fire">
+
 <style>
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f0f0f;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
+    font-family: Arial;
+    background: #0e0e0e;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
 }
-.container {
-  max-width: 600px;
-  margin: auto;
-}
-h1 {
-  color: #ff9800;
-}
-button {
-  width: 100%;
-  padding: 15px;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  background: #ff9800;
-  color: #000;
-  cursor: pointer;
-  margin-top: 15px;
-}
-button:hover {
-  background: #ffc107;
-}
+
 .box {
-  background: #1e1e1e;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: left;
-  white-space: pre-line;
-  max-height: 400px;
-  overflow-y: auto;
+    background: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 420px;
+    margin: auto;
 }
-.footer {
-  margin-top: 20px;
-  font-size: 14px;
-  opacity: 0.7;
+
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+}
+
+button {
+    background: #00ff88;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.result {
+    background: #000;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
 }
 </style>
 </head>
+
 <body>
 
-<div class="container">
-  <h1>🔥 Gerador de Sense Free Fire</h1>
-  <p>Clique e gere 1000 Sense aleatórias</p>
+<div class="box">
+    <h2>🔐 Gerador de Sense FF</h2>
 
-  <button onclick="gerarSense()">GERAR SENSE</button>
+    <input type="text" id="keyInput" placeholder="Digite sua KEY">
+    <button onclick="verificarKey()">Verificar Key</button>
 
-  <div class="box" id="resultado">
-    Clique no botão para gerar as Sense
-  </div>
-
-  <div class="footer">
-    © Site do Miguel 🗯️ - Gerador de Sense FF
-  </div>
+    <div id="gerador" style="display:none;">
+        <button onclick="gerarSense()">🎯 Gerar Sense</button>
+        <div class="result" id="resultado"></div>
+    </div>
 </div>
 
 <script>
-function rand(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+// ===================================
+// 🔑 KEYS COM DATA DE EXPIRAÇÃO
+// ===================================
+const keys = [
+    { key: "Miguel1", expira: "2025-12-31" },
+    { key: "Miguel2", expira: "2025-12-30" },
+    { key: "Miguel3", expira: "2025-12-18" }
+];
+
+// ===================================
+// 🔐 VERIFICAR KEY + EXPIRAÇÃO
+// ===================================
+function verificarKey() {
+    const keyDigitada = document.getElementById("keyInput").value;
+    const hoje = new Date();
+
+    const keyValida = keys.find(k => k.key === keyDigitada);
+
+    if (!keyValida) {
+        alert("❌ Key inválida!");
+        return;
+    }
+
+    const dataExpira = new Date(keyValida.expira);
+
+    if (hoje > dataExpira) {
+        alert("⏳ Key expirada!");
+        return;
+    }
+
+    alert("✅ Key válida! Acesso liberado.");
+    document.getElementById("gerador").style.display = "block";
 }
 
+// ===================================
+// 🎯 GERADOR DE SENSE
+// ===================================
 function gerarSense() {
-  let resultado = "";
-  for (let i = 1; i <= 1000; i++) {
-    resultado += 
-`🎯 Sense ${i}
-Geral: ${rand(80, 200)}
-Red Dot: ${rand(70, 180)}
-Mira 2x: ${rand(60, 170)}
-Mira 4x: ${rand(50, 160)}
-AWM: ${rand(20, 90)}
-Olhadinha: ${rand(50, 120)}
--------------------------\n`;
-  }
- 
- document.getElementById("resultado").innerText = resultado;
+    const r = () => Math.floor(Math.random() * 200) + 1;
+
+    document.getElementById("resultado").innerHTML = `
+        <b>🎯 Sense Gerada</b><br><br>
+        Geral: ${r()}<br>
+        Red Dot: ${r()}<br>
+        2x: ${r()}<br>
+        4x: ${r()}<br>
+        AWM: ${r()}
+    `;
 }
 </script>
 
